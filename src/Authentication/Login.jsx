@@ -107,18 +107,12 @@ const Login = () => {
                                     className="input input-bordered"
                                     required
                                 />
-                                <label className="label">
-                                    <span
-                                        className="label-text-alt link link-hover text-blue-700"
-                                        onClick={handleForgotPassword}
-                                    >
-                                        Forgot password?
-                                    </span>
-                                </label>
+                               
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Login</button>
+                                <button className="btn ">Login</button>
                             </div>
+                            {error?<><h1 className='text-center text-red-700'>{error}</h1></>:''}
                             <div className='text-center'>
                                 <h1>
                                     If you don't have an account please{' '}

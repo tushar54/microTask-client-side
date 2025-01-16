@@ -23,11 +23,12 @@ const Dashboard = () => {
         }
 
     }, [currentUser]);
+    // console.log(userdata)
     return (
         <div className='container mx-auto'>
             <DashboardNavbar data={userdata} ></DashboardNavbar>
-            <div className='grid grid-cols-8'>
-                <div className='col-span-2'>
+            <div className='flex justify-center'>
+                <div className='w-2/12  bg-yellow-700 h-[700px]'>
                     {
                         role === 'worker' && <> 
                         <Link>Task List</Link> <br />
@@ -38,20 +39,21 @@ const Dashboard = () => {
                     {
                         role==='buyer'&&
                         <>
-                         <Link>Add new Tasks</Link> <br />
-                         <Link>My Task’s</Link> <br />
-                         <Link>Purchase Coin</Link>
+                         <Link to={'buyerAddTask'}>Add new Tasks</Link> <br />
+                         <Link to={'buyerTask'}>My Task’s</Link> <br />
+                         <Link to={'buyerPurchaseCoin'}>Purchase Coin</Link>
                         </>
                     }
                     {
                         role==='admin'&&
                         <>
+                        
                          <Link to={"manageuser"}>Manage User</Link> <br />
                          <Link to={"managetask"}>Manage Task</Link>
                         </>
                     }
                 </div>
-                <div className='col-span-5'>
+                <div className=' w-8/12 bg-red-800'>
                     <Outlet></Outlet>
                 </div>
             </div>
