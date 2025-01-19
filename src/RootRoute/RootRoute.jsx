@@ -14,6 +14,7 @@ import WorkerSubmission from "../Allroute/Dashboard/Worker/WorkerSubmission";
 import WorkerHome from '../Allroute/Dashboard/Worker/WorkerHome';
 import Withdrawals from '../Allroute/Dashboard/Worker/Withdrawals';
 import WorkerTaskList from '../Allroute/Dashboard/Worker/WorkerTaskList';
+import Taskdetails from "../AllComponent/Taskdetails";
 
 
 export const router = createBrowserRouter([
@@ -54,31 +55,41 @@ export const router = createBrowserRouter([
         element: <BuyerAddTask></BuyerAddTask>
       },
       {
-        path:'buyerTask',
-        element:<BuyerTask></BuyerTask>
+        path: 'buyerTask',
+        element: <BuyerTask></BuyerTask>
       },
       {
-        path:'buyerPurchaseCoin',
-        element:<BuyerPurchaseCoin></BuyerPurchaseCoin>
+        path: 'buyerPurchaseCoin',
+        element: <BuyerPurchaseCoin></BuyerPurchaseCoin>
       },
       // worker route 
       {
-        path:'workerHome',
-        element:<WorkerHome></WorkerHome>
+        path: 'workerHome',
+        element: <WorkerHome></WorkerHome>
       },
       {
-        path:'withdrawals',
-        element:<Withdrawals></Withdrawals>
+        path: 'withdrawals',
+        element: <Withdrawals></Withdrawals>
       },
       {
-        path:'workerSubmission',
-        element:<WorkerSubmission></WorkerSubmission>
+        path: 'workerSubmission',
+        element: <WorkerSubmission></WorkerSubmission>
       },
       {
-        path:'workerTaskList',
-        element:<WorkerTaskList></WorkerTaskList>
+        path: 'workerTaskList',
+        element: <WorkerTaskList></WorkerTaskList>,
+       
+      },
+      {
+        path: 'taskDetails/:id',
+        element: <Taskdetails></Taskdetails>,
+        loader: ({ params }) => fetch(`http://localhost:5000/oneTaskDetails${params.id}`),
+       
       }
+      
+
     ]
-  }
+  },
+  
 
 ]);

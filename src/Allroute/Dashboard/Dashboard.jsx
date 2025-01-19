@@ -10,7 +10,7 @@ const Dashboard = () => {
         <div className='container mx-auto'>
             <DashboardNavbar data={userdata} ></DashboardNavbar>
             <div className='flex justify-center gap-6'>
-                <div className='w-2/12  bg-yellow-600 h-[700px]'>
+                <div className='w-2/12  bg-yellow-600 h-[150vh]'>
                     {
                         userdata?.role === 'worker' && <> 
                         <Link to={'workerTaskList'}>Task List</Link> <br />
