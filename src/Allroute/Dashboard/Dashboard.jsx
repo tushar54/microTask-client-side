@@ -1,43 +1,25 @@
-import React, { useEffect, useState } from 'react';
 import DashboardNavbar from '../../AllComponent/DashboardNavbar';
 import { Link, Outlet } from 'react-router-dom';
-import axios from 'axios';
-import useAuth from '../../AllHooks/useAuth';
+import useQueryForBuyer from '../../AllHooks/useQueryForBuyer';
 
 const Dashboard = () => {
-    const [userdata, setUserdata] = useState({})
-    const { currentUser, Out } = useAuth()
-    const { role } = userdata;
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const res = await axios.get(`http://localhost:5000/oneUser?email=${currentUser?.email}`);
-                setUserdata(res.data)
-            } catch (error) {
-                console.error("Error fetching user:", error);
-            }
-        };
-
-        if (currentUser) {
-            fetchUser();
-        }
-
-    }, [currentUser]);
-    // console.log(userdata)
+    const{userdata}=useQueryForBuyer()
+   
+    // console.log(userdata.role)
     return (
         <div className='container mx-auto'>
             <DashboardNavbar data={userdata} ></DashboardNavbar>
-            <div className='flex justify-center'>
-                <div className='w-2/12  bg-yellow-700 h-[700px]'>
+            <div className='flex justify-center gap-6'>
+                <div className='w-2/12  bg-yellow-600 h-[700px]'>
                     {
-                        role === 'worker' && <> 
-                        <Link>Task List</Link> <br />
-                        <Link>My Submissions</Link> <br />
-                        <Link>withdrawals</Link>
+                        userdata?.role === 'worker' && <> 
+                        <Link to={'workerTaskList'}>Task List</Link> <br />
+                        <Link to={'workerSubmission'}>My Submissions</Link> <br />
+                        <Link to={'withdrawals'}>withdrawals</Link>
                         </>
                     }
                     {
-                        role==='buyer'&&
+                        userdata?.role==='buyer'&&
                         <>
                          <Link to={'buyerAddTask'}>Add new Tasks</Link> <br />
                          <Link to={'buyerTask'}>My Task’s</Link> <br />
@@ -45,7 +27,7 @@ const Dashboard = () => {
                         </>
                     }
                     {
-                        role==='admin'&&
+                        userdata?.role==='admin'&&
                         <>
                         
                          <Link to={"manageuser"}>Manage User</Link> <br />
@@ -53,7 +35,7 @@ const Dashboard = () => {
                         </>
                     }
                 </div>
-                <div className=' w-8/12 bg-red-800'>
+                <div className=' w-8/12'>
                     <Outlet></Outlet>
                 </div>
             </div>

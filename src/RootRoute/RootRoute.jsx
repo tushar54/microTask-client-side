@@ -10,6 +10,10 @@ import BuyerHome from "../Allroute/Dashboard/Buyer/BuyerHome";
 import BuyerAddTask from '../Allroute/Dashboard/Buyer/BuyerAddTask';
 import BuyerTask from '../Allroute/Dashboard/Buyer/BuyerTask';
 import BuyerPurchaseCoin from '../Allroute/Dashboard/Buyer/BuyerPurchaseCoin';
+import WorkerSubmission from "../Allroute/Dashboard/Worker/WorkerSubmission";
+import WorkerHome from '../Allroute/Dashboard/Worker/WorkerHome';
+import Withdrawals from '../Allroute/Dashboard/Worker/Withdrawals';
+import WorkerTaskList from '../Allroute/Dashboard/Worker/WorkerTaskList';
 
 
 export const router = createBrowserRouter([
@@ -56,6 +60,23 @@ export const router = createBrowserRouter([
       {
         path:'buyerPurchaseCoin',
         element:<BuyerPurchaseCoin></BuyerPurchaseCoin>
+      },
+      // worker route 
+      {
+        path:'workerHome',
+        element:<WorkerHome></WorkerHome>
+      },
+      {
+        path:'withdrawals',
+        element:<Withdrawals></Withdrawals>
+      },
+      {
+        path:'workerSubmission',
+        element:<WorkerSubmission></WorkerSubmission>
+      },
+      {
+        path:'workerTaskList',
+        element:<WorkerTaskList></WorkerTaskList>
       }
     ]
   }
