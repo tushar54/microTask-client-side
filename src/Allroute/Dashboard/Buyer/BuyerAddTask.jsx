@@ -45,6 +45,7 @@ console.log(userdata)
         try {
             const taskData = {
                 user: userdata?.email,
+                name:userdata.displayName,
                 taskImageUrl,
                 taskTitle,
                 taskDetail,

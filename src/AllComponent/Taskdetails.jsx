@@ -17,9 +17,10 @@ const Taskdetails = () => {
       task_id: task._id,
       task_title: task.taskTitle,
       payable_amount: task.payableAmount,
+      required_worker:task.requiredWorkers,
       worker_email: currentUser.email,
       worker_name: currentUser.displayName,
-      buyer_name: task.user, // Assuming task.user is the buyer name
+      buyer_name: task.name, // Assuming task.user is the buyer name
       buyer_email: task.user,
       submission_details: submissionDetails,
       current_date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format

@@ -21,6 +21,7 @@ const Dashboard = () => {
                     {
                         userdata?.role==='buyer'&&
                         <>
+                        <Link to={'buyerHome'}>Home</Link><br />
                          <Link to={'buyerAddTask'}>Add new Tasks</Link> <br />
                          <Link to={'buyerTask'}>My Task’s</Link> <br />
                          <Link to={'buyerPurchaseCoin'}>Purchase Coin</Link>
