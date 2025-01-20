@@ -15,6 +15,7 @@ import WorkerHome from '../Allroute/Dashboard/Worker/WorkerHome';
 import Withdrawals from '../Allroute/Dashboard/Worker/Withdrawals';
 import WorkerTaskList from '../Allroute/Dashboard/Worker/WorkerTaskList';
 import Taskdetails from "../AllComponent/Taskdetails";
+import AdminHome from "../Allroute/Dashboard/Admin/AdminHome"
 
 
 export const router = createBrowserRouter([
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       // admin route
+      {
+        path:'AdminHome',
+        element:<AdminHome></AdminHome>
+      },
       {
         path: "manageuser",
         element: <Manageuser></Manageuser>

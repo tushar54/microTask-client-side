@@ -26,7 +26,7 @@ const WorkerSubmission = () => {
         <table className="table">
           {/* head */}
           <thead>
-            <tr>
+            <tr className='text-center'>
               <th>Jobcode</th>
               <th>Coin</th>
               <th>Status</th>
@@ -35,12 +35,19 @@ const WorkerSubmission = () => {
           </thead>
           <tbody>
             {
-              data?.map(data => <tr>
+              data?.map(data => <tr className='text-center'>
                 <th>{data.task_id}</th>
                 <th>{data.payable_amount}</th>
-                <th>{data.status}</th>
+                <th className={`px-4 py-2 ${data.status === 'pending'
+                    ? 'bg-yellow-200'
+                    : data.status === 'approved'
+                      ? 'bg-green-400'
+                      : 'bg-red-400'
+                  }`}>
+                  {data.status}
+                </th>
                 <th>{data.current_date}</th>
-               
+
               </tr>)
             }
           </tbody>
