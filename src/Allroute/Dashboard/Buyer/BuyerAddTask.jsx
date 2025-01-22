@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
 import useQueryForBuyer from '../../../AllHooks/useQueryForBuyer';
+import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 const imgbbApiKey = import.meta.env.VITE_IMGBB_API_KEY;
 
 const BuyerAddTask = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [uploading, setUploading] = useState(false);
     const [taskImageUrl, setTaskImageUrl] = useState('');
+    const axiosSecure=useAxiosSecure()
     
     const {userdata,refetch}=useQueryForBuyer()
 
@@ -22,7 +23,7 @@ console.log(userdata)
 
         setUploading(true);
         try {
-            const response = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, formData);
+            const response = await axiosSecure.post(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, formData);
             setTaskImageUrl(response.data.data.url);
             alert('Image uploaded successfully!');
         } catch (error) {
@@ -55,7 +56,7 @@ console.log(userdata)
                 submissionInfo,
             };
 
-            const res=await axios.post('http://localhost:5000/Addtask', taskData);
+            const res=await axiosSecure.post('/Addtask', taskData);
             console.log(res.data)
             alert('Task added successfully!');
             reset();

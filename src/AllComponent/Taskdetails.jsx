@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAuth from '../AllHooks/useAuth';
-import axios from 'axios';
+import useAxiosSecure from '../AllHooks/useAxiosSecure';
 
 const Taskdetails = () => {
   const task = useLoaderData()
   const { currentUser } = useAuth()
   const [submissionDetails, setSubmissionDetails] = useState('');
   const navigate=useNavigate()
+  const axiosSecure=useAxiosSecure();
 
 
   const handleSubmit = async (e) => {
@@ -28,7 +29,7 @@ const Taskdetails = () => {
     };
 console.log(submissionData)
     try {
-      const response = await axios.post('http://localhost:5000/submissions', submissionData);
+      const response = await axiosSecure.post('/submissions', submissionData);
       if (response.status === 200) {
         alert('Submission successfully saved!');
         setSubmissionDetails(''); 

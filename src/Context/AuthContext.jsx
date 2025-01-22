@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, } from "firebase/auth";
 import { auth } from "../firebase.config";
+import axios from "axios";
 
 export const Context = createContext()
 
@@ -8,6 +9,7 @@ const AuthContext = ({ children }) => {
     const provider = new GoogleAuthProvider()
     const [currentUser, setCurrentUser] = useState(null)
     const [loading, setLoading] = useState(true)
+    
 
     // googlesignup 
     const googleSignup = () => {
@@ -38,16 +40,24 @@ const AuthContext = ({ children }) => {
     useEffect(() => {
         const observer = onAuthStateChanged(auth, user => {
             setCurrentUser(user);
-            console.log(user)
-            setLoading(false)
-
-        })
-        return () => {
-            observer()
-        }
-
-
-    }, [])
+            if (user) {
+                const userinfo = { email: user.email };
+                axios.post('http://localhost:5000/jwt', userinfo)
+                    .then(res => {
+                        console.log(res)
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token); // Temporary solution, consider cookies
+                        }
+                    })
+                    .catch(err => console.error("Error setting token:", err));
+            } else {
+                localStorage.removeItem('access-token');
+            }
+            setLoading(false);
+        });
+        return () => observer();
+    }, []);
+    
     //  set observer 
 
     // value pass

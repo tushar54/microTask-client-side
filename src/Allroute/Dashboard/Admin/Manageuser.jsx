@@ -1,20 +1,21 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import React from 'react';
 import { FaTrash } from 'react-icons/fa6';
+import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 
 const ManageUser = () => {
+    const axiosSecure=useAxiosSecure()
     const { data: allUsers, isLoading, refetch } = useQuery({
         queryKey: ['allUsers'],
         queryFn: async () => {
-            const res = await axios.get('http://localhost:5000/allUser');
+            const res = await axiosSecure.get('/allUser');
             return res.data;
         },
     });
 
     const deleteUserMutation = useMutation({
         mutationFn: async (userId) => {
-            await axios.delete(`http://localhost:5000/allUser/${userId}`);
+            await axiosSecure.delete(`/allUser/${userId}`);
         },
         onSuccess: () => {
             refetch();
@@ -23,7 +24,7 @@ const ManageUser = () => {
 
     const updateRoleMutation = useMutation({
         mutationFn: async ({ userId, newRole }) => {
-            await axios.patch(`http://localhost:5000/updateStatus/${userId}`, { role: newRole });
+            await axiosSecure.patch(`/updateStatus/${userId}`, { role: newRole });
         },
         onSuccess: () => {
             refetch();

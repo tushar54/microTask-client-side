@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import useAuth from '../../../AllHooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { FcApprove, FcViewDetails } from 'react-icons/fc';
 import { CiCircleRemove } from "react-icons/ci";
+import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 
 const BuyerHome = () => {
     const { currentUser } = useAuth();
     const [modalData, setModalData] = useState(null);
+    const axiosSecure=useAxiosSecure()
 
 
     const { data: userdata, isLoading, refetch } = useQuery({
         queryKey: ['buyerpendingtask', currentUser?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/alltaskForbuyer?email=${currentUser?.email}`);
+            const res = await axiosSecure.get(`/alltaskForbuyer?email=${currentUser?.email}`);
             return res.data;
         },
         enabled: !!currentUser?.email,
@@ -29,7 +30,7 @@ const BuyerHome = () => {
     const handleApprove = async (submissionId, workerEmail, payableAmount) => {
         // console.log({payableAmount,submissionId,workerEmail})
         try {
-            await axios.patch(`http://localhost:5000/approveSubmission`, {
+            await axiosSecure.patch(`/approveSubmission`, {
                 submissionId,
                 workerEmail,
                 payableAmount,
@@ -43,7 +44,7 @@ const BuyerHome = () => {
     const handleReject = async (submissionId, taskId) => {
         console.log({submissionId,taskId})
         try {
-            await axios.patch(`http://localhost:5000/rejectSubmission`, {
+            await axiosSecure.patch(`/rejectSubmission`, {
                 submissionId,
                 taskId,
             });

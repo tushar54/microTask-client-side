@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import useAuth from '../../../AllHooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import useQueryForBuyer from '../../../AllHooks/useQueryForBuyer';
+import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 
 const BuyerTask = () => {
     const { currentUser } = useAuth();
     const {refetch:Refetch}=useQueryForBuyer()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
+    const axiosSecure=useAxiosSecure()
     const [updatedData, setUpdatedData] = useState({
         taskTitle: '',
         taskDetail: '',
@@ -20,7 +21,7 @@ const BuyerTask = () => {
     const { data: taskData, isLoading, refetch } = useQuery({
         queryKey: ['userAllTask', currentUser?.email],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/buyerAlltask?email=${currentUser?.email}`);
+            const res = await axiosSecure.get(`/buyerAlltask?email=${currentUser?.email}`);
             return res.data;
         },
         enabled: !!currentUser?.email,
@@ -48,7 +49,7 @@ const BuyerTask = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const res=await axios.patch(`http://localhost:5000/updateTask${selectedTask._id}`, updatedData);
+            const res=await axiosSecure.patch(`/updateTask${selectedTask._id}`, updatedData);
             console.log(res.data)
             refetch();
             setIsModalOpen(false);
@@ -59,7 +60,7 @@ const BuyerTask = () => {
     const handleDelete=async(data)=>{
         const {_id}=data
         try{
-            const res=await axios.delete(`http://localhost:5000/deleteBuyerTask${_id}`,
+            const res=await axiosSecure.delete(`/deleteBuyerTask${_id}`,
                 {
                     data: {
                         email: currentUser?.email,  

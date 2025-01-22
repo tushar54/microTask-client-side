@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../AllHooks/useAuth';
-import axios from 'axios';
+import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 
 const WorkerSubmission = () => {
   const { currentUser } = useAuth()
   const [data, setData] = useState()
+  const axiosSecure=useAxiosSecure()
   useEffect(() => {
     if (!currentUser) return; // Prevent running if currentUser is not available
 
     const fetchSubmissions = async () => {
       try {
-        const allsubmission = await axios.get(`http://localhost:5000/submission?email=${currentUser.email}`);
+        const allsubmission = await axiosSecure.get(`/submission?email=${currentUser.email}`);
         setData(allsubmission.data);
       } catch (error) {
         console.error('Error fetching submissions:', error);
