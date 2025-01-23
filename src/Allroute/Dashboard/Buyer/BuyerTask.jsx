@@ -3,12 +3,12 @@ import useAuth from '../../../AllHooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import useQueryForBuyer from '../../../AllHooks/useQueryForBuyer';
+import useRole from '../../../AllHooks/useRole';
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 
 const BuyerTask = () => {
     const { currentUser } = useAuth();
-    const {refetch:Refetch}=useQueryForBuyer()
+    const {refetch:Refetch}=useRole()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
     const axiosSecure=useAxiosSecure()

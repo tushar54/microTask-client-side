@@ -10,7 +10,7 @@ const Navbar = () => {
     useEffect(() => {
         const fetchUser = async () => {
           try {
-            const res = await axios.get(`http://localhost:5000/oneUser?email=${currentUser?.email}`);
+            const res = await axios.get(`http://localhost:5000/oneUser${currentUser?.email}`);
            setUserdata(res.data)
           } catch (error) {
             console.error("Error fetching user:", error);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import useQueryForBuyer from '../../../AllHooks/useQueryForBuyer';
+import useRole from '../../../AllHooks/useRole';
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 const imgbbApiKey = import.meta.env.VITE_IMGBB_API_KEY;
 
@@ -10,7 +10,7 @@ const BuyerAddTask = () => {
     const [taskImageUrl, setTaskImageUrl] = useState('');
     const axiosSecure=useAxiosSecure()
     
-    const {userdata,refetch}=useQueryForBuyer()
+    const {userdata,refetch}=useRole()
 
    console.log(userdata)
   

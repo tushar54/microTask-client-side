@@ -46,7 +46,7 @@ const AuthContext = ({ children }) => {
                     .then(res => {
                         console.log(res)
                         if (res.data.token) {
-                            localStorage.setItem('access-token', res.data.token); // Temporary solution, consider cookies
+                            localStorage.setItem('access-token', res.data.token); 
                         }
                     })
                     .catch(err => console.error("Error setting token:", err));

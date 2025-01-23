@@ -9,21 +9,25 @@ const axiosSecure = axios.create({
 })
 const useAxiosSecure = () => {
 
-   const navigate=useNavigate
-    const {Out}=useAuth()
+    const navigate = useNavigate
+    const { Out } = useAuth()
     axiosSecure.interceptors.request.use(function (config) {
         const token = localStorage.getItem('access-token')
-        console.log('stoped by interceptor', token)
+        // console.log('stoped by interceptor', token)
         config.headers.authorization = `Bearer ${token}`
         return config
     })
     axiosSecure.interceptors.response.use(function (response) {
         return response;
     },
-        async(error)=>{
-            console.log('interceptor',error)
-           await Out()
-           navigate('/login')
+        async (error) => {
+            // console.log('interceptor', error)
+            const status = error.response.status
+            if (status === 401 || status === 403) {
+                await Out()
+                navigate('/login')
+            }
+
             return Promise.reject(error);
         })
     return (

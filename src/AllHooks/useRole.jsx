@@ -2,14 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import useAuth from './useAuth';
 import useAxiosSecure from './useAxiosSecure';
 
-const useQueryForBuyer = () => {
+const useRole = () => {
     const { currentUser } = useAuth();
     const axiosSecure=useAxiosSecure()
 
     const { data: userdata, isLoading, error, refetch } = useQuery({
         queryKey: ['repoData', currentUser?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`http://localhost:5000/oneUser?email=${currentUser?.email}`);
+            const res = await axiosSecure.get(`http://localhost:5000/oneUser${currentUser?.email}`);
             return res.data;
         },
         enabled: !!currentUser?.email,
@@ -18,4 +18,4 @@ const useQueryForBuyer = () => {
     return { userdata, isLoading, error, refetch };
 };
 
-export default useQueryForBuyer;
+export default useRole;

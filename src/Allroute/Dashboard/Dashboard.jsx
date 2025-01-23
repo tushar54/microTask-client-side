@@ -1,9 +1,9 @@
 import DashboardNavbar from '../../AllComponent/DashboardNavbar';
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
-import useQueryForBuyer from '../../AllHooks/useQueryForBuyer';
+import useRole from '../../AllHooks/useRole';
 
 const Dashboard = () => {
-    const{userdata}=useQueryForBuyer()
+    const{userdata}=useRole()
     const location=useLocation()
     const defaultRoute = userdata?.role === "admin" 
         ? "AdminHome" 
