@@ -9,7 +9,7 @@ const useRole = () => {
     const { data: userdata, isLoading, error, refetch } = useQuery({
         queryKey: ['repoData', currentUser?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`http://localhost:5000/oneUser${currentUser?.email}`);
+            const res = await axiosSecure.get(`/oneUser${currentUser?.email}`);
             return res.data;
         },
         enabled: !!currentUser?.email,

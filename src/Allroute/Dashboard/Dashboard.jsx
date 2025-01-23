@@ -36,6 +36,7 @@ const Dashboard = () => {
                          <Link to={'buyerAddTask'}>Add new Tasks</Link> <br />
                          <Link to={'buyerTask'}>My Task’s</Link> <br />
                          <Link to={'buyerPurchaseCoin'}>Purchase Coin</Link>
+                         <Link to={'paymentHistory'}>Payment History</Link>
                         </>
                     }
                     {

@@ -19,6 +19,7 @@ import AdminPrivate from "../PrivateRoute/AdminPrivate";
 import BuyerPrivate from "../PrivateRoute/BuyerPrivate"
 import WorkerPrivate from '../PrivateRoute/WorkerPrivate'
 import BuyerPurchaseCoin from '../Allroute/Dashboard/Buyer/BuyerPurchaseCoin'
+import PaymentHistory from "../Allroute/Dashboard/Buyer/PaymentHistory";
 
 
 export const router = createBrowserRouter([
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
       {
         path:'buyerPurchaseCoin',
         element:<BuyerPrivate><BuyerPurchaseCoin></BuyerPurchaseCoin></BuyerPrivate>
+      },
+      {
+        path:'paymentHistory',
+        element:<BuyerPrivate><PaymentHistory></PaymentHistory></BuyerPrivate>
       },
       // worker route 
       {

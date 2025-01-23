@@ -46,6 +46,7 @@ console.log(clientSecret.clientSecret)
         await axiosSecure.post('/save-payment-info', {
           paymentIntentId: paymentIntent.id,
           coins: selectedPackage.coins,
+          cost:selectedPackage.price,
           email:userdata?.email
         });
         alert(`Payment successful! You have purchased ${selectedPackage.coins} coins.`);
