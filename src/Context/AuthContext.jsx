@@ -47,13 +47,15 @@ const AuthContext = ({ children }) => {
                         console.log(res)
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token); 
+                            setLoading(false);
                         }
                     })
                     .catch(err => console.error("Error setting token:", err));
             } else {
                 localStorage.removeItem('access-token');
+                setLoading(false);
             }
-            setLoading(false);
+            
         });
         return () => observer();
     }, []);

@@ -8,9 +8,20 @@ import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 const BuyerHome = () => {
     const { currentUser } = useAuth();
     const [modalData, setModalData] = useState(null);
-    const axiosSecure=useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
 
+    // Fetch buyer stats
+    const { data: buyerStats, isLoading: statsLoading,refetch:refetchforstats } = useQuery({
+        queryKey: ['buyerStats', currentUser?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/buyerStats?email=${currentUser?.email}`);
+            return res.data;
+        },
+        enabled: !!currentUser?.email,
+    });
+    console.log(buyerStats)
 
+    // Fetch tasks
     const { data: userdata, isLoading, refetch } = useQuery({
         queryKey: ['buyerpendingtask', currentUser?.email],
         queryFn: async () => {
@@ -22,13 +33,9 @@ const BuyerHome = () => {
 
     const handleOpenModal = (submission) => {
         setModalData(submission);
-        console.log(submission)
-    
-        
     };
 
     const handleApprove = async (submissionId, workerEmail, payableAmount) => {
-        // console.log({payableAmount,submissionId,workerEmail})
         try {
             await axiosSecure.patch(`/approveSubmission`, {
                 submissionId,
@@ -36,19 +43,20 @@ const BuyerHome = () => {
                 payableAmount,
             });
             refetch();
+            refetchforstats()
         } catch (error) {
             console.error('Error approving submission:', error);
         }
     };
 
     const handleReject = async (submissionId, taskId) => {
-        console.log({submissionId,taskId})
         try {
             await axiosSecure.patch(`/rejectSubmission`, {
                 submissionId,
                 taskId,
             });
             refetch();
+            refetchforstats()
         } catch (error) {
             console.error('Error rejecting submission:', error);
         }
@@ -56,6 +64,27 @@ const BuyerHome = () => {
 
     return (
         <div>
+            <div className="mb-6">
+                {statsLoading ? (
+                    <p>Loading stats...</p>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div className="card">
+                            <h3 className="text-lg font-bold">Total Tasks</h3>
+                            <p>{buyerStats?.totalTaskCount}</p>
+                        </div>
+                        <div className="card">
+                            <h3 className="text-lg font-bold">Pending Workers</h3>
+                            <p>{buyerStats?.pendingTask}</p>
+                        </div>
+                        <div className="card">
+                            <h3 className="text-lg font-bold">Total Payment Paid</h3>
+                            <p>${buyerStats?.totalPaymentPaid}</p>
+                        </div>
+                    </div>
+                )}
+            </div>
+
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead>
@@ -69,16 +98,16 @@ const BuyerHome = () => {
                     </thead>
                     <tbody>
                         {userdata?.map(data => (
-                            <tr key={data._id} className="space-y-4">
+                            <tr key={data._id}>
                                 <td>{data.worker_name}</td>
                                 <td>{data.task_title}</td>
                                 <td>{data.payable_amount}</td>
-                                <td className="text-2xl">
+                                <td>
                                     <button onClick={() => handleOpenModal(data)}>
                                         <FcViewDetails />
                                     </button>
                                 </td>
-                                <td className="flex gap-2 text-2xl">
+                                <td className="flex gap-2">
                                     <button onClick={() => handleApprove(data._id, data.worker_email, data.payable_amount)}>
                                         <FcApprove />
                                     </button>
@@ -97,9 +126,7 @@ const BuyerHome = () => {
                     <div className="modal-box">
                         <h2 className="text-lg font-bold">Submission Details</h2>
                         <p>{modalData.submission_details}</p>
-                        <button className="btn" onClick={() => setModalData(null)}>
-                            Close
-                        </button>
+                        <button className="btn" onClick={() => setModalData(null)}>Close</button>
                     </div>
                 </div>
             )}

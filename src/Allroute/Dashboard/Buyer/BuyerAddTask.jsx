@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useRole from '../../../AllHooks/useRole';
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
+import axios from 'axios';
 const imgbbApiKey = import.meta.env.VITE_IMGBB_API_KEY;
 
 const BuyerAddTask = () => {
@@ -23,7 +24,7 @@ console.log(userdata)
 
         setUploading(true);
         try {
-            const response = await axiosSecure.post(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, formData);
+            const response = await axios.post(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, formData);
             setTaskImageUrl(response.data.data.url);
             alert('Image uploaded successfully!');
         } catch (error) {
