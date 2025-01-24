@@ -5,10 +5,10 @@ import useRole from '../../../AllHooks/useRole';
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 
 const CheckoutForm = ({ selectedPackage }) => {
-  const {userdata,refetch}=useRole()
+  const { userdata, refetch } = useRole()
   const stripe = useStripe();
   const elements = useElements();
-const axiosSecure=useAxiosSecure()
+  const axiosSecure = useAxiosSecure()
   console.log(userdata)
 
   const handleSubmit = async (event) => {
@@ -29,7 +29,7 @@ const axiosSecure=useAxiosSecure()
         amount: selectedPackage.price * 100, // Price in cents
         coins: selectedPackage.coins, // Coin package
       });
-console.log(clientSecret.clientSecret)
+      console.log(clientSecret.clientSecret)
       // Confirm payment
       const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret.clientSecret, {
         payment_method: {
@@ -46,8 +46,8 @@ console.log(clientSecret.clientSecret)
         await axiosSecure.post('/save-payment-info', {
           paymentIntentId: paymentIntent.id,
           coins: selectedPackage.coins,
-          cost:selectedPackage.price,
-          email:userdata?.email
+          cost: selectedPackage.price,
+          email: userdata?.email
         });
         alert(`Payment successful! You have purchased ${selectedPackage.coins} coins.`);
         refetch()

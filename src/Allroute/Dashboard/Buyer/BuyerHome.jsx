@@ -79,7 +79,7 @@ const BuyerHome = () => {
                         </div>
                         <div className="card">
                             <h3 className="text-lg font-bold">Total Payment Paid</h3>
-                            <p>${buyerStats?.totalPaymentPaid}</p>
+                            <p>coin: {buyerStats?.totalPaymentPaid}</p>
                         </div>
                     </div>
                 )}
