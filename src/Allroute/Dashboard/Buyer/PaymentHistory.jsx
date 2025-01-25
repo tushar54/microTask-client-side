@@ -9,39 +9,35 @@ const PaymentHistory = () => {
     const { data: history, isLoading, refetch } = useQuery({
         queryKey: ['paymenthistory', currentUser?.email],
         queryFn: async () => {
-            console.log(currentUser.email)
             const res = await axiosSecure.get(`/paymenthistory${currentUser?.email}`);
-            console.log()
             return res.data;
         },
         enabled: !!currentUser?.email,
     });
-    console.log(history)
 
     return (
-        <div className="overflow-x-auto">
-            <table className="table">
-                {/* head */}
-                <thead>
+        <div className="overflow-x-auto px-4 py-6">
+            <table className="min-w-full table-auto bg-white border border-gray-300 rounded-lg shadow-md">
+                {/* Table Head */}
+                <thead className="bg-gray-200">
                     <tr>
-                        <th>Transection Id</th>
-                        <th>Purchased Coin</th>
-                        <th>Total Cost</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">Transaction ID</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">Purchased Coins</th>
+                        <th className="py-3 px-4 text-left text-sm font-medium text-gray-600">Total Cost</th>
                     </tr>
                 </thead>
+
+                {/* Table Body */}
                 <tbody>
                     {
-                        history?.map(data => 
-                        <tr className="">
-                            <td>{data.paymentIntentId}</td>
-                            <td>{data.coins}</td>
-                            <td>{data.cost}</td>
-                           
-                            
-                        </tr>)
+                        history?.map((data) => (
+                            <tr key={data.paymentIntentId} className="border-t border-gray-200 hover:bg-gray-50 transition duration-200">
+                                <td className="py-3 px-4 text-sm text-gray-800">{data.paymentIntentId}</td>
+                                <td className="py-3 px-4 text-sm text-gray-800">{data.coins}</td>
+                                <td className="py-3 px-4 text-sm text-gray-800">{data.cost}</td>
+                            </tr>
+                        ))
                     }
-
-
                 </tbody>
             </table>
         </div>

@@ -1,59 +1,133 @@
-import DashboardNavbar from '../../AllComponent/DashboardNavbar';
-import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
-import useRole from '../../AllHooks/useRole';
+import DashboardNavbar from "../../AllComponent/DashboardNavbar";
+import { Navigate, NavLink, Outlet, useLocation } from "react-router-dom";
+import useRole from "../../AllHooks/useRole";
+import Footer from '../../AllComponent/Footer'
 
 const Dashboard = () => {
-    const{userdata}=useRole()
-    const location=useLocation()
-    const defaultRoute = userdata?.role === "admin" 
-        ? "AdminHome" 
-        : userdata?.role === "worker" 
-        ? "workerHome" 
-        : userdata?.role==='buyer'?"buyerHome":null;
+  const { userdata } = useRole();
+  const location = useLocation();
 
-        if (location.pathname === "/Dashboard" && defaultRoute) {
-            return <Navigate to={defaultRoute} replace />;
-        }
-   
-    // console.log(userdata.role)
-    return (
-        <div className='container mx-auto'>
-            <DashboardNavbar data={userdata} ></DashboardNavbar>
-            <div className='flex justify-center gap-6'>
-                <div className='w-2/12  bg-yellow-600 h-[150vh]'>
-                    {
-                        userdata?.role === 'worker' && <> 
-                        <Link to={'workerHome'}>Home</Link><br />
-                        <Link to={'workerTaskList'}>Task List</Link> <br />
-                        <Link to={'workerSubmission'}>My Submissions</Link> <br />
-                        <Link to={'withdrawals'}>withdrawals</Link>
-                        </>
-                    }
-                    {
-                        userdata?.role==='buyer'&&
-                        <>
-                        <Link to={'buyerHome'}>Home</Link><br />
-                         <Link to={'buyerAddTask'}>Add new Tasks</Link> <br />
-                         <Link to={'buyerTask'}>My Task’s</Link> <br />
-                         <Link to={'buyerPurchaseCoin'}>Purchase Coin</Link>
-                         <Link to={'paymentHistory'}>Payment History</Link>
-                        </>
-                    }
-                    {
-                        userdata?.role==='admin'&&
-                        <>
-                        <Link to={"AdminHome"}>Home</Link><br />
-                         <Link to={"manageuser"}>Manage User</Link> <br />
-                         <Link to={"managetask"}>Manage Task</Link>
-                        </>
-                    }
-                </div>
-                <div className=' w-8/12'>
-                    <Outlet></Outlet>
-                </div>
-            </div>
+  const defaultRoute =
+    userdata?.role === "admin"
+      ? "AdminHome"
+      : userdata?.role === "worker"
+      ? "workerHome"
+      : userdata?.role === "buyer"
+      ? "buyerHome"
+      : null;
+
+  if (location.pathname === "/Dashboard" && defaultRoute) {
+    return <Navigate to={defaultRoute} replace />;
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-gray-100">
+      {/* Navbar */}
+      <DashboardNavbar data={userdata} />
+
+      <div className="lg:flex flex-grow">
+        {/* Sidebar */}
+        <div className="w-full lg:w-2/12 bg-gradient-to-b from-blue-500 to-blue-300 p-6 text-white">
+          <h2 className="text-lg font-semibold mb-4">
+            {userdata?.role?.toUpperCase()} Dashboard
+          </h2>
+          <div className="space-y-4">
+            {userdata?.role === "worker" && (
+              <>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"workerHome"}
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"workerTaskList"}
+                >
+                  Task List
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"workerSubmission"}
+                >
+                  My Submissions
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"withdrawals"}
+                >
+                  Withdrawals
+                </NavLink>
+              </>
+            )}
+            {userdata?.role === "buyer" && (
+              <>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"buyerHome"}
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"buyerAddTask"}
+                >
+                  Add New Tasks
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"buyerTask"}
+                >
+                  My Tasks
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"buyerPurchaseCoin"}
+                >
+                  Purchase Coin
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"paymentHistory"}
+                >
+                  Payment History
+                </NavLink>
+              </>
+            )}
+            {userdata?.role === "admin" && (
+              <>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"AdminHome"}
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"manageuser"}
+                >
+                  Manage User
+                </NavLink>
+                <NavLink
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  to={"managetask"}
+                >
+                  Manage Task
+                </NavLink>
+              </>
+            )}
+          </div>
         </div>
-    );
+
+        {/* Content Section */}
+        <div className="flex-grow p-6 bg-white shadow-md rounded-lg min-h-screen">
+          <Outlet />
+        </div>
+      </div>
+        <Footer></Footer>
+        
+    </div>
+  );
 };
 
 export default Dashboard;

@@ -9,13 +9,10 @@ const BuyerAddTask = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [uploading, setUploading] = useState(false);
     const [taskImageUrl, setTaskImageUrl] = useState('');
-    const axiosSecure=useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
     
-    const {userdata,refetch}=useRole()
+    const { userdata, refetch } = useRole();
 
-   console.log(userdata)
-  
-console.log(userdata)
     // Handle image upload
     const handleImageUpload = async (event) => {
         const imageFile = event.target.files[0];
@@ -43,11 +40,11 @@ console.log(userdata)
             alert('Not enough coins. Please purchase more.');
             return;
         }
-
+        console.log({requiredWorkers,payableAmount,totalPayableAmount})
         try {
             const taskData = {
                 user: userdata?.email,
-                name:userdata.displayName,
+                name: userdata.displayName,
                 taskImageUrl,
                 taskTitle,
                 taskDetail,
@@ -57,73 +54,111 @@ console.log(userdata)
                 submissionInfo,
             };
 
-            const res=await axiosSecure.post('/Addtask', taskData);
-            console.log(res.data)
+            const res = await axiosSecure.post('/Addtask', taskData);
+            console.log(res.data);
             alert('Task added successfully!');
             reset();
             setTaskImageUrl('');
             refetch();
-        
-            
         } catch (error) {
             alert('Error adding task. Please try again!');
         }
     };
- 
 
     return (
-        <section className="task-form-section space-y-3">
-            <h2 className='text-center'>Add Task</h2>
-            <form onSubmit={handleSubmit(onSubmit)} className="task-form space-y-4">
-                <div className='flex justify-between gap-4'>
-                    <div className='flex flex-col w-1/2'>
-                        <label>Task Title</label>
-                        <input type="text" {...register('taskTitle', { required: 'Task title is required' })} />
-                        {errors.taskTitle && <span>{errors.taskTitle.message}</span>}
+        <section className="task-form-section space-y-6 max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+            <h2 className="text-center text-2xl font-semibold mb-4">Add New Task</h2>
+            <form onSubmit={handleSubmit(onSubmit)} className="task-form space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-col">
+                        <label htmlFor="taskTitle" className="font-semibold">Task Title</label>
+                        <input
+                            id="taskTitle"
+                            type="text"
+                            {...register('taskTitle', { required: 'Task title is required' })}
+                            className="mt-2 p-3 border border-gray-300 rounded-md"
+                        />
+                        {errors.taskTitle && <span className="text-red-500 text-sm">{errors.taskTitle.message}</span>}
                     </div>
-                    <div className='flex flex-col w-1/2'>
-                        <label>Task Detail</label>
-                        <textarea {...register('taskDetail', { required: 'Task detail is required' })} />
-                        {errors.taskDetail && <span>{errors.taskDetail.message}</span>}
-                    </div>
-                </div>
-
-                <div className='flex justify-between gap-4'>
-                    <div className='flex flex-col w-1/2'>
-                        <label>Required Workers</label>
-                        <input type="number" {...register('requiredWorkers', { required: true, valueAsNumber: true })} />
-                        {errors.requiredWorkers && <span>Required workers is required</span>}
-                    </div>
-                    <div className='flex flex-col w-1/2'>
-                        <label>Payable Amount (per worker)</label>
-                        <input type="number" {...register('payableAmount', { required: true, valueAsNumber: true })} />
-                        {errors.payableAmount && <span>Payable amount is required</span>}
+                    <div className="flex flex-col">
+                        <label htmlFor="taskDetail" className="font-semibold">Task Detail</label>
+                        <textarea
+                            id="taskDetail"
+                            {...register('taskDetail', { required: 'Task detail is required' })}
+                            className="mt-2 p-3 border border-gray-300 rounded-md"
+                        />
+                        {errors.taskDetail && <span className="text-red-500 text-sm">{errors.taskDetail.message}</span>}
                     </div>
                 </div>
 
-                <div className='flex justify-between gap-4'>
-                    <div className='flex flex-col w-1/2'>
-                        <label>Completion Date</label>
-                        <input type="date" {...register('completionDate', { required: true })} />
-                        {errors.completionDate && <span>Completion date is required</span>}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-col">
+                        <label htmlFor="requiredWorkers" className="font-semibold">Required Workers</label>
+                        <input
+                            id="requiredWorkers"
+                            type="number"
+                            {...register('requiredWorkers', { required: 'Required workers is required',valueAsNumber: true })}
+                            className="mt-2 p-3 border border-gray-300 rounded-md"
+                        />
+                        {errors.requiredWorkers && <span className="text-red-500 text-sm">Required workers is required</span>}
                     </div>
-                    <div className='flex flex-col w-1/2'>
-                        <label>Submission Info</label>
-                        <textarea {...register('submissionInfo', { required: true })} />
-                        {errors.submissionInfo && <span>Submission info is required</span>}
+                    <div className="flex flex-col">
+                        <label htmlFor="payableAmount" className="font-semibold">Payable Amount (per worker)</label>
+                        <input
+                            id="payableAmount"
+                            type="number"
+                            {...register('payableAmount', { required: 'Payable amount is required',valueAsNumber: true })}
+                            className="mt-2 p-3 border border-gray-300 rounded-md"
+                        />
+                        {errors.payableAmount && <span className="text-red-500 text-sm">Payable amount is required</span>}
                     </div>
                 </div>
 
-                <div>
-                    <label>Task Image</label>
-                    <input type="file" {...register('image', { required: true })} accept="image/*" onChange={handleImageUpload} />
-                    {uploading && <p>Uploading image...</p>}
-                    {errors.image && <span>Image info is required</span>}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-col">
+                        <label htmlFor="completionDate" className="font-semibold">Completion Date</label>
+                        <input
+                            id="completionDate"
+                            type="date"
+                            {...register('completionDate', { required: 'Completion date is required' })}
+                            className="mt-2 p-3 border border-gray-300 rounded-md"
+                        />
+                        {errors.completionDate && <span className="text-red-500 text-sm">Completion date is required</span>}
+                    </div>
+                    <div className="flex flex-col">
+                        <label htmlFor="submissionInfo" className="font-semibold">Submission Info</label>
+                        <textarea
+                            id="submissionInfo"
+                            {...register('submissionInfo', { required: 'Submission info is required' })}
+                            className="mt-2 p-3 border border-gray-300 rounded-md"
+                        />
+                        {errors.submissionInfo && <span className="text-red-500 text-sm">Submission info is required</span>}
+                    </div>
                 </div>
 
-                <button type="submit" disabled={uploading} className='btn bg-yellow-600'>
-                    {uploading ? 'Uploading...' : 'Add Task'}
-                </button>
+                <div className="flex flex-col">
+                    <label htmlFor="image" className="font-semibold">Task Image</label>
+                    <input
+                        id="image"
+                        type="file"
+                        accept="image/*"
+                        {...register('image', { required: 'Image is required' })}
+                        onChange={handleImageUpload}
+                        className="mt-2 p-3 border border-gray-300 rounded-md"
+                    />
+                    {uploading && <p className="text-yellow-600 mt-2">Uploading image...</p>}
+                    {errors.image && <span className="text-red-500 text-sm">Image is required</span>}
+                </div>
+
+                <div className="flex justify-center">
+                    <button
+                        type="submit"
+                        disabled={uploading}
+                        className="mt-4 bg-yellow-500 text-white py-3 px-8 rounded-md hover:bg-yellow-600 transition-all"
+                    >
+                        {uploading ? 'Uploading...' : 'Add Task'}
+                    </button>
+                </div>
             </form>
         </section>
     );

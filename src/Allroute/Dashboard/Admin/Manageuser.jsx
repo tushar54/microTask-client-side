@@ -5,7 +5,8 @@ import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 
 const ManageUser = () => {
-    const axiosSecure=useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+
     const { data: allUsers, isLoading, refetch } = useQuery({
         queryKey: ['allUsers'],
         queryFn: async () => {
@@ -30,35 +31,30 @@ const ManageUser = () => {
         onSuccess: () => {
             refetch();
             Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Your work has been saved",
+                position: 'top-end',
+                icon: 'success',
+                title: 'Role updated successfully!',
                 showConfirmButton: false,
-                timer: 1500
-              });
+                timer: 1500,
+            });
         },
     });
 
     const handleDelete = (userId) => {
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
+            title: 'Are you sure?',
+            text: "This action cannot be undone!",
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
-           
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
             if (result.isConfirmed) {
                 deleteUserMutation.mutate(userId);
-                Swal.fire({
-                  title: "Deleted!",
-                  text: "Your file has been deleted.",
-                  icon: "success"
-                });
-              }
-          });
+                Swal.fire('Deleted!', 'User has been deleted.', 'success');
+            }
+        });
     };
 
     const handleRoleChange = (userId, newRole) => {
@@ -68,56 +64,56 @@ const ManageUser = () => {
     if (isLoading) return <p>Loading...</p>;
 
     return (
-        <div>
+        <div className="p-4">
+            <h1 className="text-2xl font-semibold text-center mb-6">Manage Users</h1>
             <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr className="text-center">
-                            <th>UserName & Image</th>
-                            <th>User Email</th>
-                            <th>Role</th>
-                            <th>Coin</th>
-                            <th>Change Role</th>
-                            <th>Delete User</th>
+                <table className="table w-full border border-gray-200 shadow-lg">
+                    <thead className="bg-gray-200 text-sm text-gray-600">
+                        <tr>
+                            <th className="p-4 text-left">User Name & Image</th>
+                            <th className="p-4 text-left">Email</th>
+                            <th className="p-4 text-left">Role</th>
+                            <th className="p-4 text-left">Coins</th>
+                            <th className="p-4 text-center">Change Role</th>
+                            <th className="p-4 text-center">Action</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {allUsers?.map((user) => (
-                            <tr className="text-center" key={user._id}>
-                                <td>
-                                    <div className="flex items-center gap-3">
-                                        <div className="avatar">
-                                            <div className="mask mask-squircle h-12 w-12">
-                                                <img src={user.imgurl} alt="User Avatar" />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div className="font-bold">{user.name}</div>
-                                        </div>
+                            <tr
+                                key={user._id}
+                                className="border-b border-gray-200 hover:bg-gray-100 text-sm"
+                            >
+                                <td className="flex items-center gap-4 p-4">
+                                    <div className="w-12 h-12">
+                                        <img
+                                            src={user.imgurl}
+                                            alt="User"
+                                            className="rounded-full border w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    <div>
+                                        <p className="font-medium">{user.name}</p>
                                     </div>
                                 </td>
-                                <td>{user.email}</td>
-                                <td>{user.role}</td>
-                                <td>{user.coin}</td>
-                                <td>
+                                <td className="p-4">{user.email}</td>
+                                <td className="p-4 capitalize">{user.role}</td>
+                                <td className="p-4">{user.coin}</td>
+                                <td className="p-4 text-center">
                                     <select
-                                        className="select select-bordered select-sm"
+                                        className="border rounded-md p-2 text-sm"
                                         defaultValue={user.role}
                                         onChange={(e) => handleRoleChange(user._id, e.target.value)}
                                     >
-
-                                      
                                         <option value="admin">Admin</option>
                                         <option value="buyer">Buyer</option>
                                         <option value="worker">Worker</option>
                                     </select>
                                 </td>
-                                <td>
+                                <td className="p-4 text-center">
                                     <button
-                                        className="btn btn-sm btn-error"
                                         onClick={() => handleDelete(user._id)}
+                                        className="bg-red-500 text-white rounded-full p-2 hover:bg-red-600 transition"
                                     >
                                         <FaTrash />
                                     </button>

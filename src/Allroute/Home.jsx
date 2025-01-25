@@ -7,6 +7,7 @@ import BestWorker from '../AllComponent/BestWorker';
 import FeedbackSlider from '../AllComponent/FeedbackSlider';
 import StatsSection from '../AllComponent/StastSection';
 import InfoSection from '../AllComponent/InfoSection';
+import BlogSection from '../AllComponent/Blog';
 
 const Home = () => {
     const location = useLocation()
@@ -19,9 +20,10 @@ const Home = () => {
             {location.pathname === '/' && 
                <> <Bannar></Bannar>
                 <BestWorker></BestWorker>
+                <InfoSection></InfoSection>
                 <FeedbackSlider></FeedbackSlider>
                 <StatsSection></StatsSection>
-                <InfoSection></InfoSection>
+                <BlogSection></BlogSection>
                 </>
             }
            

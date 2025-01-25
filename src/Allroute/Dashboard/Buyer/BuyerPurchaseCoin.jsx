@@ -16,23 +16,23 @@ const BuyerPurchaseCoin = () => {
   ];
 
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto p-4">
       {!selectedPackage ? (
         <div className="grid gap-10 justify-center items-center md:grid-cols-2 lg:grid-cols-4 text-lg">
           {coinPackages.map((pkg) => (
             <div
               key={pkg.id}
-              className="w-[200px] h-[200px] text-center space-y-4 border-2 flex flex-col justify-center items-center cursor-pointer hover:shadow-lg"
+              className="w-[200px] h-[200px] text-center space-y-4 border-2 border-gray-300 rounded-lg shadow-lg hover:shadow-xl hover:border-blue-500 cursor-pointer transition-all duration-300 transform hover:scale-105 p-4"
               onClick={() => setSelectedPackage(pkg)}
             >
-              <p>{pkg.coins} Coins</p>
-              <p>${pkg.price}</p>
+              <p className="font-semibold text-xl">{pkg.coins} Coins</p>
+              <p className="text-lg text-gray-700">${pkg.price}</p>
             </div>
           ))}
         </div>
       ) : (
-        <div>
-          <h2 className="text-center mb-4">
+        <div className="max-w-md mx-auto text-center bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4">
             You selected {selectedPackage.coins} Coins for ${selectedPackage.price}
           </h2>
           <Elements stripe={stripePromise}>
@@ -40,7 +40,7 @@ const BuyerPurchaseCoin = () => {
           </Elements>
           <button
             onClick={() => setSelectedPackage(null)}
-            className="mt-4 px-4 py-2 bg-red-600 text-white font-bold rounded"
+            className="mt-4 px-6 py-3 bg-red-600 text-white font-bold rounded-md shadow-md hover:bg-red-700 transition duration-300"
           >
             Cancel
           </button>

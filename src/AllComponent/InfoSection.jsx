@@ -19,10 +19,12 @@ const InfoSection = () => {
                         apps, Picoworkers offers a diverse range of options to boost your
                         income. Whether you are a student, freelancer, or stay-at-home
                         parent our platform connects you with employers quickly and safely
-                        with a seamless payment experience. Register now!
+                        with a seamless payment experience. Register now!<span className="text-sm text-red-400">(If you are a worker you can find A job other wise you don't )</span>
                     </p>
                     {
-                        currentUser ? '' : <Link to={'/login'} className="bg-white text-red-600 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-200 transition">
+                        currentUser ? <Link to={'/Dashboard'} className="bg-white text-red-600 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-200 transition">
+                            Find A Job
+                        </Link> : <Link to={'/login'} className="bg-white text-red-600 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-200 transition">
                             Find A Job
                         </Link>
                     }
@@ -39,11 +41,15 @@ const InfoSection = () => {
                         your micro jobs and start getting it done in minutes. App testing,
                         surveys, promoting social media, or getting sign-ups, get it done
                         with Picoworkers – One platform for all your needs, sign-up now and
-                        start creating a job!!
+                        start creating a job!! <span className="text-sm text-red-400">(If you are a Buyer you can post A job other wise you don't )</span>
                     </p>
-                    <button className="bg-red-600 text-white font-semibold px-6 py-2 rounded-lg shadow hover:bg-red-700 transition">
-                        Post A Job
-                    </button>
+                    {
+                        currentUser ? <Link to={'/Dashboard'} className="bg-white text-red-600 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-200 transition">
+                           Post A Job
+                        </Link> : <Link to={'/login'} className="bg-white text-red-600 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-200 transition">
+                           Post A Job
+                        </Link>
+                    }
 
                 </div>
             </div>

@@ -6,7 +6,6 @@ import axios from 'axios';
 const Navbar = () => {
     const [userdata, setUserdata] = useState({})
     const { currentUser, Out } = useAuth()
-    // console.log(currentUser?.email)
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -21,7 +20,9 @@ const Navbar = () => {
             fetchUser();
         }
     }, [currentUser]);
-    //   console.log(userdata)
+
+    console.log(userdata)
+
     const { role, coin, imgurl, name, email
     } = userdata || {}
     const SignOut = () => {
@@ -31,29 +32,35 @@ const Navbar = () => {
     }
 
 
-    const section = <>
-    <NavLink to={'/'} className='btn'>Home</NavLink>
-    <NavLink className='btn'>Junior As Developer</NavLink>
-   
-        
+    const section = <div className='lg:flex justify-center items-center gap-1'>
+        {
+            currentUser ? <p className=' border-2 px-2 py-1 rounded-sm flex justify-center items-center font-bold text-lg'>${userdata?.coin}</p> : ''
+        }
+        <NavLink to={'/'} className='border-2 border-blue-600 px-3 py-3 rounded-md'>Home</NavLink>
+        {
+            currentUser?<NavLink className='border-2 border-blue-600 px-3  rounded-md'>Junior As <br /> Developer</NavLink>:<NavLink className='border-2 border-blue-600 px-3 py-3 rounded-md'>Junior As Developer</NavLink>
+        }
+
+
         {
             currentUser ? <>
-                <NavLink to={'/Dashboard'}><button className='text-lg border-2 border-green-400 px-3 py-2 rounded-md'>Dashboard</button></NavLink>
+                <NavLink to={'/Dashboard'}><button className='text-lg border-2 border-blue-600 px-2 py-1 rounded-md'>Dashboard</button></NavLink>
+
 
             </> : ''
         }
         {
             currentUser ? <>
-            <div className='flex justify-center items-center gap-4'>
-                <Link className='text-lg border-2 border-green-400 px-3 py-2 rounded-md' onClick={SignOut}>
-                    <button>LogOut</button>
-                </Link>
-                <img referrerPolicy='no-referrer' className='w-[50px] h-[50px] rounded-full' src={imgurl} alt="" />
-            </div>
+                <div className='md:flex space-y-1 items-center gap-3 '>
+                    <Link className='text-lg border-2 border-blue-600 px-2 py-1 rounded-md' onClick={SignOut}>
+                        <button>LogOut</button>
+                    </Link>
+                    <img referrerPolicy='no-referrer' className='w-[40px] h-[40px] rounded-full' src={imgurl} alt="" />
+                </div>
             </> :
-                <Link to={'/login'}><button className='text-lg border-2 border-green-400 px-3 py-2 rounded-md'>Log-in</button></Link>
+                <Link to={'/login'}><button className='text-lg border-2 border-blue-600 px-3 py-2 rounded-md'>Log-in</button></Link>
         }
-    </>
+    </div>
 
 
     return (
@@ -82,7 +89,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu absolute right-2 menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-40 p-2 space-x-4 shadow">
+                            className="menu absolute right-2 menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-40 p-2 space-y-2  shadow flex flex-col justify-start items-start *:w-full">
                             {section}
                         </ul>
                     </div>
