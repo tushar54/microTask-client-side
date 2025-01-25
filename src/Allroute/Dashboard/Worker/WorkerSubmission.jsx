@@ -4,7 +4,9 @@ import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 
 const WorkerSubmission = () => {
   const { currentUser } = useAuth();
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); // Set number of items per page
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
@@ -21,6 +23,17 @@ const WorkerSubmission = () => {
 
     fetchSubmissions(); // Call the function to fetch data
   }, [currentUser]);
+
+  // Calculate index of the first and last item of the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data?.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Calculate total number of pages
+  const totalPages = Math.ceil(data?.length / itemsPerPage);
 
   return (
     <div className="px-4 py-8 max-w-7xl mx-auto">
@@ -39,7 +52,7 @@ const WorkerSubmission = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((submission, index) => (
+            {currentItems?.map((submission, index) => (
               <tr key={index} className="text-center border-b">
                 <td className="py-3 px-4">{submission.task_id}</td>
                 <td className="py-3 px-4">{submission.payable_amount}</td>
@@ -59,6 +72,33 @@ const WorkerSubmission = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 mx-2 bg-indigo-600 text-white rounded-md disabled:opacity-50"
+        >
+          Prev
+        </button>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => paginate(index + 1)}
+            className={`px-4 py-2 mx-2 ${currentPage === index + 1 ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800'} rounded-md`}
+          >
+            {index + 1}
+          </button>
+        ))}
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 mx-2 bg-indigo-600 text-white rounded-md disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
