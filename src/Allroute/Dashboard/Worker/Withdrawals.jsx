@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useRole from '../../../AllHooks/useRole';
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const Withdrawals = () => {
   const axiosSecure = useAxiosSecure();
@@ -44,13 +45,23 @@ const Withdrawals = () => {
     try {
       setIsLoading(true); // Set loading to true
       const response = await axiosSecure.post('/withdrawRequest', withdrawalData);
-      alert('Withdrawal request submitted successfully!');
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Payment Successful",
+        showConfirmButton: false,
+        timer: 1500
+      });
       resetForm()
       refetch()
       console.log(response.data);
     } catch (error) {
-      console.error('Withdrawal request failed:', error);
-      alert('Failed to submit withdrawal request.');
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
     } finally {
       setIsLoading(false); // Reset loading state
     }

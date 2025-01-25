@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAuth from '../AllHooks/useAuth';
 import useAxiosSecure from '../AllHooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const Taskdetails = () => {
   const task = useLoaderData()
@@ -27,17 +28,27 @@ const Taskdetails = () => {
       current_date: new Date().toISOString().split('T')[0], // Current date in YYYY-MM-DD format
       status: 'pending',
     };
-console.log(submissionData)
+
     try {
       const response = await axiosSecure.post('/submissions', submissionData);
       if (response.status === 200) {
-        alert('Submission successfully saved!');
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
         setSubmissionDetails(''); 
         navigate('/Dashboard/workerTaskList')
       }
     } catch (error) {
-      console.error('Error submitting the task:', error);
-      alert('Failed to submit the task. Please try again.');
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
     }
   };
 

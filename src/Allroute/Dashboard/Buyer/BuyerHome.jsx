@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FcApprove, FcViewDetails } from 'react-icons/fc';
 import { CiCircleRemove } from "react-icons/ci";
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const BuyerHome = () => {
     const { currentUser } = useAuth();
@@ -37,11 +38,28 @@ const BuyerHome = () => {
 
     const handleApprove = async (submissionId, workerEmail, payableAmount) => {
         try {
-            await axiosSecure.patch(`/approveSubmission`, {
-                submissionId,
-                workerEmail,
-                payableAmount,
-            });
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+              }).then(async(result) => {
+                if (result.isConfirmed) {
+                    await axiosSecure.patch(`/approveSubmission`, {
+                        submissionId,
+                        workerEmail,
+                        payableAmount,
+                    });
+                  Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                  });
+                }
+              });
             refetch();
             refetchforstats()
         } catch (error) {
@@ -51,12 +69,30 @@ const BuyerHome = () => {
 
     const handleReject = async (submissionId, taskId) => {
         try {
-            await axiosSecure.patch(`/rejectSubmission`, {
-                submissionId,
-                taskId,
-            });
-            refetch();
-            refetchforstats()
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+              }).then(async(result) => {
+                if (result.isConfirmed) {
+                    await axiosSecure.patch(`/rejectSubmission`, {
+                        submissionId,
+                        taskId,
+                    });
+                    refetch();
+                    refetchforstats()
+                  Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                  });
+                }
+              });
+           
         } catch (error) {
             console.error('Error rejecting submission:', error);
         }
@@ -83,6 +119,9 @@ const BuyerHome = () => {
                         </div>
                     </div>
                 )}
+            </div>
+            <div>
+                <h1 className='text-center font-bold m-4'>Pending Submission</h1>
             </div>
 
             <div className="overflow-x-auto">

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { FaDeleteLeft } from 'react-icons/fa6';
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const ManageTask = () => {
     const axiosSecure=useAxiosSecure()
@@ -15,10 +16,27 @@ const ManageTask = () => {
     })
 
     const handleDelete=async(id)=>{
-        console.log(id)
-        const result=await axiosSecure.delete(`/DeleteTaskbyadmin/${id}`)
-        refetch()
-        console.log(result.data)
+        
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then(async(result) => {
+            if (result.isConfirmed) {
+                const result=await axiosSecure.delete(`/DeleteTaskbyadmin/${id}`)
+                refetch()
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+          });
+        
     }
     console.log(alltask)
     return (

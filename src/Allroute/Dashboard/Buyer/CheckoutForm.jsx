@@ -3,6 +3,7 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './style.css';
 import useRole from '../../../AllHooks/useRole';
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const CheckoutForm = ({ selectedPackage }) => {
   const { userdata, refetch } = useRole()
@@ -49,7 +50,13 @@ const CheckoutForm = ({ selectedPackage }) => {
           cost: selectedPackage.price,
           email: userdata?.email
         });
-        alert(`Payment successful! You have purchased ${selectedPackage.coins} coins.`);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `Payment successful! You have purchased ${selectedPackage.coins} coins.`,
+          showConfirmButton: false,
+          timer: 2000
+        });
         refetch()
 
       }

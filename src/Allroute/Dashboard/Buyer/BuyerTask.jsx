@@ -5,13 +5,14 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import useRole from '../../../AllHooks/useRole';
 import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const BuyerTask = () => {
     const { currentUser } = useAuth();
-    const {refetch:Refetch}=useRole()
+    const { refetch: Refetch } = useRole()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedTask, setSelectedTask] = useState(null);
-    const axiosSecure=useAxiosSecure()
+    const axiosSecure = useAxiosSecure()
     const [updatedData, setUpdatedData] = useState({
         taskTitle: '',
         taskDetail: '',
@@ -49,32 +50,57 @@ const BuyerTask = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const res=await axiosSecure.patch(`/updateTask${selectedTask._id}`, updatedData);
-            console.log(res.data)
+            const res = await axiosSecure.patch(`/updateTask${selectedTask._id}`, updatedData);
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500
+            });
             refetch();
             setIsModalOpen(false);
         } catch (error) {
             console.error('Error updating task:', error);
         }
     };
-    const handleDelete=async(data)=>{
-        const {_id}=data
-        try{
-            const res=await axiosSecure.delete(`/deleteBuyerTask${_id}`,
-                {
-                    data: {
-                        email: currentUser?.email,  
-                        requiredWorkers: data.requiredWorkers,
-                        payableAmount: data.payableAmount,
+    const handleDelete = async (data) => {
+        const { _id } = data
+        try {
 
-                    }
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    const res = await axiosSecure.delete(`/deleteBuyerTask${_id}`,
+                        {
+                            data: {
+                                email: currentUser?.email,
+                                requiredWorkers: data.requiredWorkers,
+                                payableAmount: data.payableAmount,
+
+                            }
+                        }
+                    )
+                    refetch()
+                    Refetch()
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
                 }
-            )
-            console.log(res.data)
-            refetch()
-            Refetch()
+            });
+
+
         }
-        catch(error){
+        catch (error) {
             console.log(error)
         }
     }
@@ -106,7 +132,7 @@ const BuyerTask = () => {
                                 >
                                     <FaEdit />
                                 </td>
-                                <td onClick={()=>handleDelete(data)} className='text-xl text-red-500 cursor-pointer'>
+                                <td onClick={() => handleDelete(data)} className='text-xl text-red-500 cursor-pointer'>
                                     <MdDeleteForever />
                                 </td>
                             </tr>
