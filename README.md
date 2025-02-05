@@ -88,11 +88,11 @@ The **Micro Tasking and Earning Platform** is a full-stack MERN application that
 ### Steps:  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-repository-link
+   git clone https://github.com/tushar54/microTask-client-side/edit/main
    cd your-repository
 2. For client
-cd client
-npm install
+   -cd client
+   -npm install
 
 4. Set up environment variables
    
