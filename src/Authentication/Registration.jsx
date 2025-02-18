@@ -54,7 +54,7 @@ const Registration = () => {
         photoURL: imgurl,
       });
 
-      await axios.post("http://localhost:5000/user", {
+      await axios.post("https://micro-service-earning-platfrom-server-side.vercel.app/user", {
         name,
         email,
         imgurl,
@@ -62,7 +62,7 @@ const Registration = () => {
         coin,
       });
 
-      navigate("/");
+      navigate("/Dashboard");
     } catch (error) {
       console.error("Signup Error:", error);
     }
@@ -77,14 +77,14 @@ const Registration = () => {
     try {
       const result = await googleSignup();
       const user = result.user;
-      await axios.post("http://localhost:5000/user", {
+      await axios.post("https://micro-service-earning-platfrom-server-side.vercel.app/user", {
         name: user.displayName,
         email: user.email,
         imgurl: user.photoURL,
         role: googleRole,
         coin,
       });
-      navigate("/");
+      navigate("/Dashboard");
     } catch (error) {
       console.error("Google sign-in failed:", error);
     }

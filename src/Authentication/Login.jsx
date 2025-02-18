@@ -27,7 +27,7 @@ const Login = () => {
             .then((result) => {
                 setError('');
                 if (!loading) {
-                    navigate(location?.state ? location.state : '/')
+                    navigate(location?.state ? location.state : '/Dashboard')
                 }
 
 
@@ -55,14 +55,14 @@ const Login = () => {
         try {
           const result = await googleSignup();
           const user = result.user;
-          await axios.post("http://localhost:5000/user", {
+          await axios.post("https://micro-service-earning-platfrom-server-side.vercel.app/user", {
             name: user.displayName,
             email: user.email,
             imgurl: user.photoURL,
             role: googleRole,
             coin
           });
-          navigate(location?.state ? location.state:'/')
+          navigate(location?.state ? location.state:'/Dashboard')
         } catch (error) {
           console.error("Google sign-in failed:", error);
         }

@@ -102,7 +102,7 @@ export const router = createBrowserRouter([
           {
             path: 'taskDetails/:id',
             element: <WorkerPrivate><Taskdetails></Taskdetails></WorkerPrivate>,
-            loader: ({ params }) => fetch(`http://localhost:5000/oneTaskDetails${params.id}`),
+            loader: ({ params }) => fetch(`https://micro-service-earning-platfrom-server-side.vercel.app/oneTaskDetails${params.id}`),
 
           }
 

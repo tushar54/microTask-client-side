@@ -12,7 +12,7 @@ const WorkerTaskList = () => {
             return res.data;
         },
     });
-    console.log(alltask)
+   
 
     return (
         <div className="px-4 py-8 max-w-7xl mx-auto">

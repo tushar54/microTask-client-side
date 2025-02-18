@@ -51,7 +51,17 @@ const AdminHome = () => {
         timer: 1500,
       });
     },
+    onError: (error) => {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Insufficiant coin",
+        text: error.response?.data?.message || "Something went wrong. Please try again.",
+        showConfirmButton: true,
+      });
+    },
   });
+  
 
   const handlePaymentSuccess = (requestId, withdrawalAmount, workerEmail) => {
     paymentSuccessMutation.mutate({ requestId, withdrawalAmount, workerEmail });

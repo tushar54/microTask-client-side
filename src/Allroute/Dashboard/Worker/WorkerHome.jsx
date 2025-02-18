@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const WorkerHome = () => {
   const { currentUser } = useAuth();
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const axiosSecure = useAxiosSecure();
 
   const { data: workerStats, isLoading: statsLoading, refetch: refetchforstats } = useQuery({
@@ -31,6 +31,7 @@ const WorkerHome = () => {
 
     fetchSubmissions(); // Call the function to fetch data
   }, [currentUser]);
+  console.log(data)
 
   return (
     <div className="px-4 py-8 max-w-7xl mx-auto">
@@ -66,16 +67,31 @@ const WorkerHome = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((item, index) => (
-              <tr key={index} className="text-center border-b">
-                <td className="py-2 px-4">{item.task_id}</td>
-                <td className="py-2 px-4">{item.payable_amount}</td>
-                <td className={`py-2 px-4 ${item.status === 'approved' ? 'bg-green-500 text-white' : 'bg-yellow-500 text-white'}`}>
-                  {item.status}
+
+            {data.length > 0 ? (
+              data.map((item, index) => (
+                <tr key={index} className="text-center border-b">
+                  <td className="py-2 px-4">{item.task_id}</td>
+                  <td className="py-2 px-4">{item.payable_amount}</td>
+                  <td
+                    className={`py-2 px-4 ${item.status === "approved"
+                        ? "bg-green-500 text-white"
+                        : "bg-yellow-500 text-white"
+                      }`}
+                  >
+                    {item.status}
+                  </td>
+                  <td className="py-2 px-4">{item.current_date}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4} className="text-center py-4">
+                  Here is no data
                 </td>
-                <td className="py-2 px-4">{item.current_date}</td>
               </tr>
-            ))}
+            )}
+
           </tbody>
         </table>
       </div>

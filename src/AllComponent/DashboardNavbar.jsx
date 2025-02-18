@@ -49,7 +49,7 @@ const DashboardNavbar = ({ data }) => {
             </button>
             <ul
               tabIndex={0}
-              className="menu dropdown-content bg-white text-gray-700 rounded-box z-[1] mt-3 w-52 p-2 shadow-md">
+              className=" right-5 menu dropdown-content bg-white text-gray-700 rounded-box z-[1] mt-3 w-52 p-2 shadow-md">
               {allInfo}
             </ul>
           </div>

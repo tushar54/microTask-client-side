@@ -10,7 +10,7 @@ const CheckoutForm = ({ selectedPackage }) => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure()
-  console.log(userdata)
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,14 +30,14 @@ const CheckoutForm = ({ selectedPackage }) => {
         amount: selectedPackage.price * 100, // Price in cents
         coins: selectedPackage.coins, // Coin package
       });
-      console.log(clientSecret.clientSecret)
+     
       // Confirm payment
       const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret.clientSecret, {
         payment_method: {
           card,
         },
       });
-      console.log(paymentIntent)
+     
 
       if (error) {
         console.error('Payment Error:', error.message);

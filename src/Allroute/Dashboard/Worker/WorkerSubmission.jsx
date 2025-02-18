@@ -4,9 +4,9 @@ import useAxiosSecure from '../../../AllHooks/useAxiosSecure';
 
 const WorkerSubmission = () => {
   const { currentUser } = useAuth();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5); // Set number of items per page
+  const [itemsPerPage] = useState(1); // Set number of items per page
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
@@ -29,11 +29,14 @@ const WorkerSubmission = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data?.slice(indexOfFirstItem, indexOfLastItem);
 
+
+ 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // Calculate total number of pages
   const totalPages = Math.ceil(data?.length / itemsPerPage);
+  console.log({indexOfFirstItem,indexOfLastItem,currentItems,currentPage,totalPages})
 
   return (
     <div className="px-4 py-8 max-w-7xl mx-auto">

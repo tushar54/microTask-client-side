@@ -42,9 +42,9 @@ const AuthContext = ({ children }) => {
             setCurrentUser(user);
             if (user) {
                 const userinfo = { email: user.email };
-                axios.post('http://localhost:5000/jwt', userinfo)
+                axios.post('https://micro-service-earning-platfrom-server-side.vercel.app/jwt', userinfo)
                     .then(res => {
-                        console.log(res)
+                       
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token); 
                             setLoading(false);

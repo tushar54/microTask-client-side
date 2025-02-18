@@ -18,7 +18,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 export default function Bannar() {
     return (
-        <>
+        <div className='mt-24'>
             <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
@@ -31,7 +31,7 @@ export default function Bannar() {
                 }}
                 navigation={true}
                 modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper w-full h-[450px] overflow-hidden container mx-auto "
+                className="mySwiper w-full h-[450px] rounded-md overflow-hidden container mx-auto "
             >
                 <SwiperSlide
                     className="bg-cover bg-center w-full h-full relative"
@@ -92,6 +92,6 @@ export default function Bannar() {
             </Swiper>
 
             <div></div>
-        </>
+        </div>
     );
 }

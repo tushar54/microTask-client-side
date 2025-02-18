@@ -11,7 +11,7 @@ import BlogSection from '../AllComponent/Blog';
 
 const Home = () => {
     const location = useLocation()
-    console.log(location.pathname)
+  
     return (
         <div>
             <div className='container mx-auto'>

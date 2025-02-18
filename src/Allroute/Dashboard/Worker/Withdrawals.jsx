@@ -55,7 +55,7 @@ const Withdrawals = () => {
       });
       resetForm();
       refetch();
-      console.log(response.data);
+     
     } catch (error) {
       Swal.fire({
         icon: 'error',

@@ -94,7 +94,7 @@ const BuyerTask = () => {
                 }
             });
         } catch (error) {
-            console.log(error);
+        
         }
     };
 

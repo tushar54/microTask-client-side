@@ -40,7 +40,7 @@ const BuyerAddTask = () => {
             alert('Not enough coins. Please purchase more.');
             return;
         }
-        console.log({requiredWorkers,payableAmount,totalPayableAmount})
+       
         try {
             const taskData = {
                 user: userdata?.email,
@@ -55,7 +55,7 @@ const BuyerAddTask = () => {
             };
 
             const res = await axiosSecure.post('/Addtask', taskData);
-            console.log(res.data);
+           
             alert('Task added successfully!');
             reset();
             setTaskImageUrl('');
