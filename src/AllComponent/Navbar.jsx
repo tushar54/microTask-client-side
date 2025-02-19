@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../AllHooks/useAuth';
 import axios from 'axios';
 import { ThemeContext } from '../ThemeProvider/ThemeProvider';
@@ -9,6 +9,7 @@ const Navbar = () => {
     const [userdata, setUserdata] = useState({});
     const { currentUser, Out } = useAuth();
     const { theme, toggleTheme } = useContext(ThemeContext);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -30,6 +31,7 @@ const Navbar = () => {
     const { imgurl } = userdata || {};
     const SignOut = () => {
         Out()
+        navigate('/')
             .then(() => { })
             .catch((error) => { });
     };
@@ -86,6 +88,11 @@ const Navbar = () => {
                             alt=""
                         />
                     </div>
+                    <NavLink to="/Profile" className="text-lg border-2 border-blue-600 px-2  flex justify-center items-center py-2 rounded-md">
+                        <button >
+                            Profile
+                        </button>
+                    </NavLink>
                 </>
             ) : (
                 <Link to="/login" className="text-lg border-2 px-3  border-blue-600  py-2 rounded-md flex justify-center items-center">
@@ -111,7 +118,7 @@ const Navbar = () => {
                     </button>
                 </div>
 
-                <div className="navbar-end w-[80%] flex-grow flex justify-end items-center">
+                <div className="navbar-end w-[95%] flex-grow flex justify-end items-center">
                     {/* Dropdown for small screens */}
                     <div className="dropdown lg:hidden">
                         <label

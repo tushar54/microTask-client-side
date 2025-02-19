@@ -23,6 +23,7 @@ import PaymentHistory from "../Allroute/Dashboard/Buyer/PaymentHistory";
 import DynamicTitle from "../DynamicTitle/DynamicTitle";
 import ErrorPage from "../Allroute/ErrorPage";
 import About from "../Allroute/About";
+import Profile from "../Allroute/Profile";
 
 
 export const router = createBrowserRouter([
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
           {
             path:'/aboutUs',
             element:<About></About>
+          },
+          {
+            path:'Profile',
+            element:<Profile></Profile>
           }
         ]
       },
