@@ -35,25 +35,25 @@ const Dashboard = () => {
             {userdata?.role === "worker" && (
               <>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block  bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"workerHome"}
                 >
                   Home
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"workerTaskList"}
                 >
                   Task List
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block  bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"workerSubmission"}
                 >
                   My Submissions
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"withdrawals"}
                 >
                   Withdrawals
@@ -63,31 +63,31 @@ const Dashboard = () => {
             {userdata?.role === "buyer" && (
               <>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"buyerHome"}
                 >
                   Home
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"buyerAddTask"}
                 >
                   Add New Tasks
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"buyerTask"}
                 >
                   My Tasks
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"buyerPurchaseCoin"}
                 >
                   Purchase Coin
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"paymentHistory"}
                 >
                   Payment History
@@ -97,19 +97,19 @@ const Dashboard = () => {
             {userdata?.role === "admin" && (
               <>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"AdminHome"}
                 >
                   Home
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"manageuser"}
                 >
                   Manage User
                 </NavLink>
                 <NavLink
-                  className="block  text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
+                  className="block bg-white text-blue-500 hover:bg-blue-600 hover:text-white p-2 rounded-md text-center"
                   to={"managetask"}
                 >
                   Manage Task

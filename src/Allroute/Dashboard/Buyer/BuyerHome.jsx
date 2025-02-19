@@ -104,7 +104,7 @@ const BuyerHome = () => {
         {statsLoading ? (
           <p>Loading stats...</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-black">
             <StatsCard title="Total Tasks" value={buyerStats?.totalTaskCount} />
             <StatsCard title="Pending Workers" value={buyerStats?.pendingTask} />
             <StatsCard title="Total Payment Paid" value={`coin: ${buyerStats?.totalPaymentPaid}`} />
