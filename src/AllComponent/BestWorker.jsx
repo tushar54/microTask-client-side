@@ -27,7 +27,7 @@ const BestWorker = () => {
 
     return (
         <div>
-            <div className='container mx-auto'><h1 className='text-3xl font-bold ml-8 m-10'>Best Workers</h1></div>
+            <div className='container mx-auto text-center'><h1 className='text-3xl font-bold ml-8 m-10'>Best Workers</h1></div>
             <div className='grid md:grid-cols-3 container mx-auto justify-center items-center gap-5'>
                 {
                     bestworker?.map(worker =>

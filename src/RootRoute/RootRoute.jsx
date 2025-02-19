@@ -22,6 +22,7 @@ import BuyerPurchaseCoin from '../Allroute/Dashboard/Buyer/BuyerPurchaseCoin'
 import PaymentHistory from "../Allroute/Dashboard/Buyer/PaymentHistory";
 import DynamicTitle from "../DynamicTitle/DynamicTitle";
 import ErrorPage from "../Allroute/ErrorPage";
+import About from "../Allroute/About";
 
 
 export const router = createBrowserRouter([
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
           {
             path: "/register",
             element: <Registration></Registration>
+          },
+          {
+            path:'/aboutUs',
+            element:<About></About>
           }
         ]
       },

@@ -40,7 +40,7 @@ const Navbar = () => {
             )}
             <NavLink
                 to="/"
-                className="border-2 border-blue-400 px-2 py-3 flex justify-center items-center rounded-md"
+                className=" border-2 border-blue-400 px-2 py-3 flex justify-center items-center rounded-md"
             >
                 Home
             </NavLink>
@@ -50,6 +50,12 @@ const Navbar = () => {
                     className="border-2 border-blue-600 px-1 py-3 flex justify-center items-center  rounded-md"
                 >
                     Join As Developer
+                </NavLink>
+                <NavLink
+                    to="/aboutUs"
+                    className="border-2 border-blue-600 px-1 py-3 flex justify-center items-center  rounded-md"
+                >
+                   About Us
                 </NavLink>
             
             {currentUser && (
