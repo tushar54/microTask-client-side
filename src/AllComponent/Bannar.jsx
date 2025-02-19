@@ -15,8 +15,11 @@ import 'swiper/css/navigation';
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Link } from 'react-router-dom';
+import useAuth from '../AllHooks/useAuth';
 
 export default function Bannar() {
+    const {currentUser}=useAuth()
     return (
         <div className='mt-24'>
             <Swiper
@@ -41,8 +44,12 @@ export default function Bannar() {
                     <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
                     {/* Text Content */}
-                    <div className="font-bold flex justify-center items-center w-full h-full text-center text-white text-3xl relative">
-                    Find the Best Micro Jobs <br /> in Our Marketplace.
+                    <div className="font-bold flex flex-col justify-center items-center w-full h-full text-center text-white text-3xl relative">
+                        Find the Best Micro Jobs <br /> in Our Marketplace
+                        {currentUser?<h1>  <Link to={'/Dashboard'} className='btn
+                   mt-3'>View More</Link></h1>:<h1>  <Link to={'/login'} className='btn
+                   mt-3'>View More</Link></h1>}
+                        
                     </div>
                 </SwiperSlide>
 
@@ -54,8 +61,11 @@ export default function Bannar() {
                     <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
                     {/* Text Content */}
-                    <div className="font-bold flex justify-center items-center w-full h-full text-center text-white text-3xl relative">
+                    <div className="font-bold flex flex-col justify-center items-center w-full h-full text-center text-white text-3xl relative">
                         You can Work any Time
+                        {currentUser?<h1>  <Link to={'/Dashboard'} className='btn
+                   mt-3'>View More</Link></h1>:<h1>  <Link to={'/login'} className='btn
+                   mt-3'>View More</Link></h1>}
                     </div>
                 </SwiperSlide>
 
@@ -67,8 +77,11 @@ export default function Bannar() {
                     <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
                     {/* Text Content */}
-                    <div className="font-bold flex justify-center items-center w-full h-full text-center text-white text-3xl relative">
+                    <div className="font-bold flex flex-col justify-center items-center w-full h-full text-center text-white text-3xl relative">
                         You Will be Benefited <br /> From Our Website
+                        {currentUser?<h1>  <Link to={'/Dashboard'} className='btn
+                   mt-3'>View More</Link></h1>:<h1>  <Link to={'/login'} className='btn
+                   mt-3'>View More</Link></h1>}
                     </div>
                 </SwiperSlide>
                 <SwiperSlide
@@ -79,8 +92,11 @@ export default function Bannar() {
                     <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
                     {/* Text Content */}
-                    <div className="font-bold flex justify-center items-center w-full h-full text-center text-white text-3xl relative">
-                       Give Your Passion And <br /> Work With our Website.
+                    <div className="font-bold flex flex-col justify-center items-center w-full h-full text-center text-white text-3xl relative">
+                        Give Your Passion And <br /> Work With our Website.
+                        {currentUser?<h1>  <Link to={'/Dashboard'} className='btn
+                   mt-3'>View More</Link></h1>:<h1>  <Link to={'/login'} className='btn
+                   mt-3'>View More</Link></h1>}
                     </div>
                 </SwiperSlide>
 
