@@ -40,22 +40,22 @@ const WorkerHome = () => {
           <div className="text-center text-gray-500">Loading stats...</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div className="card p-6 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
+            <div className="card p-6  shadow-lg rounded-lg hover:shadow-xl transition-shadow">
               <h3 className="text-lg font-bold text-gray-800">Total Tasks</h3>
               <p className="text-xl font-semibold text-indigo-600">{workerStats?.totalTaskCount}</p>
             </div>
-            <div className="card p-6 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
+            <div className="card p-6  shadow-lg rounded-lg hover:shadow-xl transition-shadow">
               <h3 className="text-lg font-bold text-gray-800">Pending Work</h3>
               <p className="text-xl font-semibold text-yellow-600">{workerStats?.pendingTask}</p>
             </div>
-            <div className="card p-6 bg-white shadow-lg rounded-lg hover:shadow-xl transition-shadow">
+            <div className="card p-6  shadow-lg rounded-lg hover:shadow-xl transition-shadow">
               <h3 className="text-lg font-bold text-gray-800">Total Payment Paid</h3>
               <p className="text-xl font-semibold text-green-600">coin: {workerStats?.totalPaymentPaid}</p>
             </div>
           </div>
         )}
       </div>
-      <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+      <div className="overflow-x-auto  shadow-lg rounded-lg">
         <table className="table-auto w-full text-left border-collapse">
           {/* head */}
           <thead className="bg-indigo-600 text-white">

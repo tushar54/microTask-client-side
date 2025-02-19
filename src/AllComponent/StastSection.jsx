@@ -28,13 +28,13 @@ const StatsSection = () => {
       {stats.map((stat) => (
         <div
           key={stat.id}
-          className="w-60 bg-white rounded-lg shadow-md p-4 flex flex-col items-center"
+          className="w-60  rounded-lg shadow-md p-4 flex flex-col items-center"
         >
           <div className="w-12 h-12 flex items-center justify-center bg-red-100 rounded-full mb-4">
             {stat.icon}
           </div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">{stat.value}</h2>
-          <p className="text-gray-500 text-center">{stat.label}</p>
+          <h2 className="text-3xl font-bold  mb-2">{stat.value}</h2>
+          <p className=" text-center">{stat.label}</p>
         </div>
       ))}
     </div>

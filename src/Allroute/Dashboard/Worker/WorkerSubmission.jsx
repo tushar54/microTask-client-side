@@ -43,7 +43,7 @@ const WorkerSubmission = () => {
       <div className="text-center mb-6">
         <h2 className="text-3xl font-semibold text-gray-800">Submission List</h2>
       </div>
-      <div className="overflow-x-auto bg-white shadow-lg rounded-lg">
+      <div className="overflow-x-auto  shadow-lg rounded-lg">
         <table className="table-auto w-full text-left border-collapse">
           {/* head */}
           <thead className="bg-indigo-600 text-white">

@@ -78,7 +78,7 @@ const ManageTask = () => {
                     {alltask?.map((task) => (
                         <div
                             key={task._id}
-                            className="border border-gray-200 shadow-lg rounded-lg p-4 mb-4 bg-white"
+                            className="border border-gray-200 shadow-lg rounded-lg p-4 mb-4 "
                         >
                             <p>
                                 <strong>Task ID:</strong> {task._id}

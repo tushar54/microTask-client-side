@@ -38,7 +38,7 @@ const FeedbackSlider = () => {
     ];
 
     return (
-        <div className="p-6 bg-gray-100">
+        <div className="p-6 ">
             <h2 className="text-3xl font-bold text-center mb-8">What Our Users Say</h2>
             <Swiper
                 modules={[Navigation, Pagination]}
@@ -54,7 +54,7 @@ const FeedbackSlider = () => {
             >
                 {feedbacks.map((feedback) => (
                     <SwiperSlide key={feedback.id}>
-                        <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
+                        <div className="flex flex-col items-center  p-6 rounded-lg shadow-lg">
                             <div className="w-24 h-24 rounded-full overflow-hidden mb-4">
                                 <img
                                     src={feedback.photo}
@@ -63,7 +63,7 @@ const FeedbackSlider = () => {
                                 />
                             </div>
                             <h3 className="text-xl font-semibold mb-2">{feedback.name}</h3>
-                            <p className="text-gray-600 text-center italic">"{feedback.quote}"</p>
+                            <p className=" text-center italic">"{feedback.quote}"</p>
                         </div>
                     </SwiperSlide>
                 ))}

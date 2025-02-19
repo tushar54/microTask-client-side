@@ -32,18 +32,18 @@ const blogs = [
 
 const BlogSection = () => {
   return (
-    <div className="bg-gray-50 p-8 md:p-16">
-      <h2 className="text-center text-3xl font-bold text-gray-800 mb-4">
+    <div className=" p-8 md:p-16">
+      <h2 className="text-center text-3xl font-bold  mb-4">
         Latest Blogs
       </h2>
-      <p className="text-center text-gray-500 mb-8">
+      <p className="text-center  mb-8">
         Read Latest Blogs from Picoworkers
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {blogs.map((blog) => (
           <div
             key={blog.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
+            className=" rounded-lg shadow-md overflow-hidden"
           >
             <img
               src={blog.image}
@@ -51,11 +51,11 @@ const BlogSection = () => {
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
-              <p className="text-sm text-gray-500 mb-2">{blog.date}</p>
-              <h3 className="text-lg font-bold text-gray-800 mb-2">
+              <p className="text-sm  mb-2">{blog.date}</p>
+              <h3 className="text-lg font-bold  mb-2">
                 {blog.title}
               </h3>
-              <p className="text-gray-600 text-sm mb-4">{blog.description}</p>
+              <p className=" text-sm mb-4">{blog.description}</p>
               <a
                 href="https://www.youtube.com/"
                 className="text-red-500 font-semibold text-sm hover:underline"

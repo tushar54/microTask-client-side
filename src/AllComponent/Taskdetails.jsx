@@ -54,7 +54,7 @@ const Taskdetails = () => {
 
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-3xl mx-auto p-6  shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold mb-4">{task.taskTitle}</h1>
       <img src={task.taskImageUrl} alt={task.taskTitle} className="w-full h-60 object-cover rounded-md mb-4" />
       <p><strong>Task Detail:</strong> {task.taskDetail}</p>

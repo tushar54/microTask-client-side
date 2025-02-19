@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../AllHooks/useAuth';
 import axios from 'axios';
+import { ThemeContext } from '../ThemeProvider/ThemeProvider';
+import { CiDark, CiLight } from 'react-icons/ci';
 
 const Navbar = () => {
     const [userdata, setUserdata] = useState({});
     const { currentUser, Out } = useAuth();
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -27,8 +30,8 @@ const Navbar = () => {
     const { imgurl } = userdata || {};
     const SignOut = () => {
         Out()
-            .then(() => {})
-            .catch((error) => {});
+            .then(() => { })
+            .catch((error) => { });
     };
 
     const section = (
@@ -45,19 +48,19 @@ const Navbar = () => {
                 Home
             </NavLink>
 
-                <NavLink
-                    to="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-tushar54"
-                    className="border-2 border-blue-600 px-1 py-3 flex justify-center items-center  rounded-md"
-                >
-                    Join As Developer
-                </NavLink>
-                <NavLink
-                    to="/aboutUs"
-                    className="border-2 border-blue-600 px-1 py-3 flex justify-center items-center  rounded-md"
-                >
-                   About Us
-                </NavLink>
-            
+            <NavLink
+                to="https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-tushar54"
+                className="border-2 border-blue-600 px-1 py-3 flex justify-center items-center  rounded-md"
+            >
+                Join As Developer
+            </NavLink>
+            <NavLink
+                to="/aboutUs"
+                className="border-2 border-blue-600 px-1 py-3 flex justify-center items-center  rounded-md"
+            >
+                About Us
+            </NavLink>
+
             {currentUser && (
                 <>
                     <NavLink to="/Dashboard" className="text-lg border-2 border-blue-600 px-2  flex justify-center items-center py-2 rounded-md">
@@ -71,7 +74,7 @@ const Navbar = () => {
                 <>
                     <div className="text-lg border-2 border-blue-600 px-2 py-1 rounded-md flex justify-center items-center gap-3">
                         <Link
-                            
+
                             onClick={SignOut}
                         >
                             <button>LogOut</button>
@@ -103,6 +106,9 @@ const Navbar = () => {
                             miCroTask
                         </h1>
                     </Link>
+                    <button className="btn ml-2" onClick={toggleTheme}>
+                        {theme === 'light' ? <CiDark /> : <CiLight />}
+                    </button>
                 </div>
 
                 <div className="navbar-end w-[80%] flex-grow flex justify-end items-center">

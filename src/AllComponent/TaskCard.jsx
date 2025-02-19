@@ -13,7 +13,7 @@ const TaskCard = ({ data }) => {
 
     return (
         <div className="p-4">
-            <div className="border rounded-lg shadow-lg bg-white transition-all duration-300 hover:shadow-xl hover:scale-105">
+            <div className="border rounded-lg shadow-lg  transition-all duration-300 hover:shadow-xl hover:scale-105">
                 <div className="p-6">
                     <h2 className="text-xl font-semibold text-gray-800 mb-3">{taskTitle}</h2>
                     <p className="text-sm text-gray-600 mb-2">

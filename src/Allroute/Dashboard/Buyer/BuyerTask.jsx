@@ -140,7 +140,7 @@ const BuyerTask = () => {
             {/* Responsive Edit Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-40 bg-gray-800 bg-opacity-75 flex justify-center items-start overflow-y-auto pt-10 pb-10">
-                    <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
+                    <div className=" rounded-lg shadow-lg w-full max-w-lg p-6 relative">
                         <h2 className="text-xl font-semibold mb-4 text-center">Edit Task</h2>
                         <button
                             onClick={() => setIsModalOpen(false)}

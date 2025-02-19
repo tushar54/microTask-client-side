@@ -17,7 +17,7 @@ const PaymentHistory = () => {
 
     return (
         <div className="overflow-x-auto px-4 py-6">
-            <table className="min-w-full table-auto bg-white border border-gray-300 rounded-lg shadow-md">
+            <table className="min-w-full table-auto  border border-gray-300 rounded-lg shadow-md">
                 {/* Table Head */}
                 <thead className="bg-gray-200">
                     <tr>

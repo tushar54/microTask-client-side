@@ -31,7 +31,7 @@ const BuyerPurchaseCoin = () => {
           ))}
         </div>
       ) : (
-        <div className="max-w-md mx-auto text-center bg-white p-6 rounded-lg shadow-lg">
+        <div className="max-w-md mx-auto text-center  p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-semibold mb-4">
             You selected {selectedPackage.coins} Coins for ${selectedPackage.price}
           </h2>

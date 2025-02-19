@@ -75,15 +75,15 @@ const AdminHome = () => {
           <p className="text-center text-gray-600">Loading stats...</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white shadow-md rounded-lg p-4 text-center">
+            <div className=" shadow-md rounded-lg p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-700">Total Worker</h3>
               <p className="text-2xl font-bold text-gray-900">{allinfo?.result}</p>
             </div>
-            <div className="bg-white shadow-md rounded-lg p-4 text-center">
+            <div className=" shadow-md rounded-lg p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-700">Total Buyer</h3>
               <p className="text-2xl font-bold text-gray-900">{allinfo?.result1}</p>
             </div>
-            <div className="bg-white shadow-md rounded-lg p-4 text-center">
+            <div className=" shadow-md rounded-lg p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-700">
                 Total Available Coin
               </h3>
@@ -91,7 +91,7 @@ const AdminHome = () => {
                 Coin: {allinfo?.totalCoins}
               </p>
             </div>
-            <div className="bg-white shadow-md rounded-lg p-4 text-center">
+            <div className=" shadow-md rounded-lg p-4 text-center">
               <h3 className="text-lg font-semibold text-gray-700">Total Payments</h3>
               <p className="text-2xl font-bold text-gray-900">{allinfo?.result2}</p>
             </div>
@@ -107,7 +107,7 @@ const AdminHome = () => {
         {isWithdrawLoading ? (
           <p className="text-center text-gray-600">Loading withdrawal requests...</p>
         ) : (
-          <div className="overflow-x-auto bg-white shadow-md rounded-lg">
+          <div className="overflow-x-auto  shadow-md rounded-lg">
             <table className="table-auto w-full border-collapse">
               <thead>
                 <tr className="bg-gray-200 text-gray-800">
