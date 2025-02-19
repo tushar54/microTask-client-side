@@ -8,6 +8,7 @@ import FeedbackSlider from '../AllComponent/FeedbackSlider';
 import StatsSection from '../AllComponent/StastSection';
 import InfoSection from '../AllComponent/InfoSection';
 import BlogSection from '../AllComponent/Blog';
+import Newsletter from '../AllComponent/NewsLetter';
 
 const Home = () => {
     const location = useLocation()
@@ -24,6 +25,7 @@ const Home = () => {
                 <FeedbackSlider></FeedbackSlider>
                 <StatsSection></StatsSection>
                 <BlogSection></BlogSection>
+                <Newsletter></Newsletter>
                 </>
             }
            
