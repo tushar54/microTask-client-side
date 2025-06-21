@@ -3,9 +3,10 @@ import React from 'react';
 const Footer = () => {
     return (
         <div>
-            <footer className="footer bg-gradient-to-r from-blue-200 to-blue-300 text-black p-10">
+            
+            <footer className="footer bg-gradient-to-r from-purple-500 via-pink-400 to-purple-600 text-white p-10 ">
                 <aside>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-500 via-slate-500 to-purple-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r text-white bg-clip-text text-transparent">
                         miCroTask
                     </h1>
 
